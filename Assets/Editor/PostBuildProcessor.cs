@@ -26,7 +26,7 @@ public class PostBuildProcessor : MonoBehaviour
 
 	public static void OnPreprocessBuildiOS (string exportPath)
 	{
-		Debug.Log("[UCB Demos] Here is my pre-export method running!")
+		Debug.Log("[UCB Demos] Here is my pre-export method running!");
 	}
 	#endif
 	
