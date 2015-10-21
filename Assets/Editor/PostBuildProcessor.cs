@@ -21,10 +21,10 @@ public class PostBuildProcessor : MonoBehaviour
 	public static void OnPostprocessBuildiOS (string exportPath)
 	{
 		Debug.Log("[UCB Demos] OnPostprocessBuildiOS");
-		ProcessPostBuild(BuildTarget.iPhone,exportPath);
+		ProcessPostBuild(BuildTarget.iOS,exportPath);
 	}
 
-	public static void OnPreprocessBuildiOS (string exportPath)
+	public static void OnPreprocessBuildiOS()
 	{
 		Debug.Log("[UCB Demos] Here is my pre-export method running!");
 	}
