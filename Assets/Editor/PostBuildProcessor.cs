@@ -23,6 +23,11 @@ public class PostBuildProcessor : MonoBehaviour
 		Debug.Log("[UCB Demos] OnPostprocessBuildiOS");
 		ProcessPostBuild(BuildTarget.iPhone,exportPath);
 	}
+
+	public static void OnPreprocessBuildiOS (string exportPath)
+	{
+		Debug.Log("[UCB Demos] Here is my pre-export method running!")
+	}
 	#endif
 	
 	/**
@@ -51,27 +56,27 @@ public class PostBuildProcessor : MonoBehaviour
 	{
 		// This code will set modules to enabled in Xcode build settings
 		#if UNITY_IOS
-
+		
 		Debug.Log ("[UNITY_IOS] ProcessPostBuild - Xcode Manipulation API");
 		
 		// Go get pbxproj file
 		string projPath = path + "/Unity-iPhone.xcodeproj/project.pbxproj";
-			
+		
 		// PBXProject class represents a project build settings file,
 		// here is how to read that in.
 		PBXProject proj = new PBXProject ();
-		proj.ReadFromString (File.ReadAllText (projPath));
-
+		proj.ReadFromFile (projPath);
+		
 		// This is the Xcode target in the generated project
 		string target = proj.TargetGuidByName ("Unity-iPhone");
-
+		
 		// Here we go: Set 'Enable Modules' to YES to prevent errors using @import syntax
 		Debug.Log("Enabling modules: CLANG_ENABLE_MODULES = YES");
 		proj.AddBuildProperty(target, "CLANG_ENABLE_MODULES", "YES");
-
+		
 		// Write PBXProject object back to the file
-		File.WriteAllText (projPath, proj.WriteToString ());
-
+		proj.WriteToFile (projPath);
+		
 		#endif
 	}
 }
